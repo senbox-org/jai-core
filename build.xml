@@ -629,8 +629,8 @@ $State: Exp $
            debug="${debugsetting}"
            debuglevel="lines,source"
            deprecation="on"
-           source="1.3"
-           target="1.3">
+           source="1.5"
+           target="1.5">
       <exclude name="**/com/sun/media/jai/test/*.java"/>
     </javac>
 

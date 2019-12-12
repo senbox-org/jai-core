@@ -813,16 +813,15 @@ $State: Exp $
 
     <target name="opt-mvn-install" depends="jar">
         <property name="groupId" value="javax.media.jai"/>
-        <property name="mav" value="1.1.4"/> <!-- maven artifact version-->
         <property name="pkg" value="jar"/> <!-- packaging -->
         <exec executable="cmd">
             <arg value="/c"/>
             <arg value="mvn"/>
             <arg value="install:install-file"/>
             <arg value="-Dfile=${jardir}/jai-core.jar"/>
-            <arg value="-DartifactId=jai-core-open-jdk"/>
+            <arg value="-DartifactId=jai-core-openjdk"/>
             <arg value="-DgroupId=${groupId}"/>
-            <arg value="-Dversion=${mav}"/>
+            <arg value="-Dversion=${version_base}"/>
             <arg value="-Dpackaging=${pkg}"/>
         </exec>
         <exec executable="cmd">
@@ -830,9 +829,9 @@ $State: Exp $
             <arg value="mvn"/>
             <arg value="install:install-file"/>
             <arg value="-Dfile=${jardir}/jai-codec.jar"/>
-            <arg value="-DartifactId=jai-codec-open-jdk"/>
+            <arg value="-DartifactId=jai-codec-openjdk"/>
             <arg value="-DgroupId=${groupId}"/>
-            <arg value="-Dversion=${mav}"/>
+            <arg value="-Dversion=${version_base}"/>
             <arg value="-Dpackaging=${pkg}"/>
         </exec>
         <exec executable="cmd">
@@ -840,9 +839,9 @@ $State: Exp $
             <arg value="mvn"/>
             <arg value="install:install-file"/>
             <arg value="-Dfile=${jardir}/mlibwrapper-jai.jar"/>
-            <arg value="-DartifactId=mlibwrapper-jai-open-jdk"/>
+            <arg value="-DartifactId=mlibwrapper-jai-openjdk"/>
             <arg value="-DgroupId=${groupId}"/>
-            <arg value="-Dversion=${mav}"/>
+            <arg value="-Dversion=${version_base}"/>
             <arg value="-Dpackaging=${pkg}"/>
         </exec>
     </target>

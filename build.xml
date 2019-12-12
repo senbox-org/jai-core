@@ -9,7 +9,7 @@ $Revision: 1.10 $
 $Date: 2007-08-27 21:31:23 $
 $State: Exp $
 -->
-<project name="jai" default="jar" basedir=".">
+<project name="jai" default="mvn-install-files" basedir=".">
   <description>
     This project builds Java Advanced Imaging.
 
@@ -55,19 +55,19 @@ $State: Exp $
 
     FCS builds are simply
 
-    jai-{version}-{os}-{arch}-.zip 
+    jai-{version}-{os}-{arch}-.zip
 
     The default is to do a daily build. This may be overriden by setting
     the BUILD_TYPE property on the command line to do a different kind
     of build:
-  
+
       BUILD_TYPE=daily   Do a daily build (default)
       BUILD_TYPE=stable  Do a stable build : -bNN
       BUILD_TYPE=beta    Do a beta or RC production build : -betaN or -rcN
       BUILD_TYPE=fcs     Do an FCS production build : [no suffix]
-  
+
     For example:
-  
+
       ant -DBUILD_TYPE=stable ...
 
     The "MLIB_DIR" property may be used via the ant "-D" command line
@@ -130,19 +130,19 @@ $State: Exp $
 
     <condition property="isSolarisOnAMD64">
         <equals arg1="${BUILD_TARGET}" arg2="solaris-amd64" trim="true"/>
-    </condition>   
+    </condition>
 
     <condition property="isSolarisOnSparc">
         <equals arg1="${BUILD_TARGET}" arg2="solaris-sparc" trim="true"/>
-    </condition>   
+    </condition>
 
     <condition property="isSolarisOnSparcV9">
         <equals arg1="${BUILD_TARGET}" arg2="solaris-sparcv9" trim="true"/>
-    </condition>   
+    </condition>
 
     <condition property="isSolarisOnX86">
         <equals arg1="${BUILD_TARGET}" arg2="solaris-i586" trim="true"/>
-    </condition>   
+    </condition>
 
     <condition property="isWindowsOnX86">
         <equals arg1="${BUILD_TARGET}" arg2="windows-i586" trim="true"/>
@@ -161,19 +161,19 @@ $State: Exp $
 
     <condition property="isSolarisOnAMD64">
       <os name="SunOS" arch="amd64"/>
-    </condition>   
+    </condition>
 
     <condition property="isSolarisOnSparcV9">
       <os name="SunOS" arch="sparcv9"/>
-    </condition>   
+    </condition>
 
     <condition property="isSolarisOnSparc">
       <os name="SunOS" arch="sparc"/>
-    </condition>   
+    </condition>
 
     <condition property="isSolarisOnX86">
         <os name="SunOS" arch="x86"/>
-    </condition>   
+    </condition>
 
     <condition property="isWindowsOnX86">
 	<os family="windows" arch="x86"/>
@@ -206,7 +206,7 @@ $State: Exp $
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
-  <target name="setupSolarisSparc" if="isSolarisOnSparc">	
+  <target name="setupSolarisSparc" if="isSolarisOnSparc">
     <property name="ostype" value="solaris"/>
     <property name="platform" value="solaris-sparc"/>
     <property name="arch" value="sparc"/>
@@ -214,7 +214,7 @@ $State: Exp $
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
-  <target name="setupSolarisSparcV9" if="isSolarisOnSparcV9">	
+  <target name="setupSolarisSparcV9" if="isSolarisOnSparcV9">
     <property name="ostype" value="solaris"/>
     <property name="platform" value="solaris-sparcv9"/>
     <property name="arch" value="sparcv9"/>
@@ -230,7 +230,7 @@ $State: Exp $
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
-  <target name="setupWindows" if="isWindowsOnX86">	
+  <target name="setupWindows" if="isWindowsOnX86">
     <property name="ostype" value="windows"/>
     <property name="platform" value="windows-i586"/>
     <property name="arch" value="i386"/>
@@ -294,7 +294,7 @@ $State: Exp $
     <tstamp>
       <!-- Set build time property -->
       <format property="btime" pattern="dd_MMM_yyyy"/>
-    </tstamp>    
+    </tstamp>
 
     <property name="version" value="${version_base}-${version_suffix}"/>
     <property name="version_file" value="${version_base_file}-${version_suffix}-lib"/>
@@ -351,7 +351,7 @@ $State: Exp $
   <target name="echo" depends="setupPlatform,mlib-property"
 	  description="Prints the values of pertinent properties.">
     <echo message="os.arch         = ${os.arch}"/>
-    <echo message="os.name         = ${os.name}"/>	
+    <echo message="os.name         = ${os.name}"/>
     <echo message="ant.home        = ${ant.home}"/>
     <echo message="java.home       = ${java.home}"/>
     <echo message="user.name       = ${user.name}"/>
@@ -478,7 +478,7 @@ $State: Exp $
   </target>
 
   <!-- Creates some source files from jai-core so that
-       jai_codec.jar is independent of jai_core.jar. -->
+       jai-codec.jar is independent of jai-core.jar. -->
   <target name="codec-util" depends="check-codec-util"
 	  if="build_codec_util" unless="codec_util_built">
     <!-- Create the codec util directory -->
@@ -595,7 +595,8 @@ $State: Exp $
   <!-- Copies mediaLib files. -->
   <target name="mlib">
     <!-- Copy the mediaLib jar file -->
-    <copy file="${mlib}/mlibwrapper_jai.jar" todir="${jardir}"/>
+    <!--    <copy file="${mlib}/mlibwrapper_jai.jar" todir="${jardir}"/>-->
+    <copy file="${mlib}/mlibwrapper_jai.jar" tofile="${jardir}/mlibwrapper-jai.jar"/>
 
     <!-- Copy the mediaLib native libraries -->
     <copy todir="${libdir}">
@@ -675,7 +676,7 @@ $State: Exp $
       <attribute name="Implementation-Title"
                  value="javax.media.jai"/>
       <attribute name="Implementation-Version"
-                 value="${version}"/> 
+                 value="${version}"/>
       <attribute name="Implementation-Vendor"
                  value="Sun Microsystems, Inc."/>
       <attribute name="Extension-Name"
@@ -684,7 +685,7 @@ $State: Exp $
     </manifest>
   </target>
 
-  <!-- Create jai_core.jar. -->
+  <!-- Create jai-core.jar. -->
   <target name="jar-core" depends="compile,manifest-core">
     <property name="javax" value="${src}/javax/media/jai"/>
     <property name="com"   value="${src}/com/sun/media/jai"/>
@@ -711,8 +712,8 @@ $State: Exp $
       </fileset>
     </copy>
 
-    <!-- Create jai_core.jar -->
-    <jar jarfile="${jardir}/jai_core.jar"
+    <!-- Create jai-core.jar -->
+    <jar jarfile="${jardir}/jai-core.jar"
          manifest="${builddir}/Manifest-core" update="yes" filesonly="true">
 	<fileset dir="${classdir}">
           <exclude name="**/codec/**"/>
@@ -745,7 +746,7 @@ $State: Exp $
     </manifest>
   </target>
 
-  <!-- Create jai_codec.jar. -->
+  <!-- Create jai-codec.jar. -->
   <target name="jar-codec" depends="compile,manifest-codec">
     <property name="codec" value="${src}/com/sun/media/jai/codec"/>
     <property name="codecimpl" value="${src}/com/sun/media/jai/codecimpl"/>
@@ -767,8 +768,8 @@ $State: Exp $
     <!-- Create lib directory -->
     <mkdir dir="${jardir}"/>
 
-    <!-- Create jai_codec.jar -->
-    <jar jarfile="${jardir}/jai_codec.jar"
+    <!-- Create jai-codec.jar -->
+    <jar jarfile="${jardir}/jai-codec.jar"
          manifest="${builddir}/Manifest-codec" update="yes" filesonly="true">
 	<fileset dir="${classdir}">
           <include name="**/codec/**"/>
@@ -799,6 +800,51 @@ $State: Exp $
 
   <target name="jar" depends="jar-debug,jar-opt"
 	  description="Executes targets jar-debug and jar-opt."/>
+
+    <!--
+    The targets "mvn-install-files" and "opt-mvn-install" require that maven is already installed.
+    -->
+    <target name="mvn-install-files" depends="jar">
+        <antcall target="optcall">
+            <param name="targetname" value="opt-mvn-install"/>
+        </antcall>
+    </target>
+
+    <target name="opt-mvn-install" depends="jar">
+        <property name="groupId" value="javax.media.jai"/>
+        <property name="mav" value="1.1.4"/> <!-- maven artifact version-->
+        <property name="pkg" value="jar"/> <!-- packaging -->
+        <exec executable="cmd">
+            <arg value="/c"/>
+            <arg value="mvn"/>
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${jardir}/jai-core.jar"/>
+            <arg value="-DartifactId=jai-core-open-jdk"/>
+            <arg value="-DgroupId=${groupId}"/>
+            <arg value="-Dversion=${mav}"/>
+            <arg value="-Dpackaging=${pkg}"/>
+        </exec>
+        <exec executable="cmd">
+            <arg value="/c"/>
+            <arg value="mvn"/>
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${jardir}/jai-codec.jar"/>
+            <arg value="-DartifactId=jai-codec-open-jdk"/>
+            <arg value="-DgroupId=${groupId}"/>
+            <arg value="-Dversion=${mav}"/>
+            <arg value="-Dpackaging=${pkg}"/>
+        </exec>
+        <exec executable="cmd">
+            <arg value="/c"/>
+            <arg value="mvn"/>
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${jardir}/mlibwrapper-jai.jar"/>
+            <arg value="-DartifactId=mlibwrapper-jai-open-jdk"/>
+            <arg value="-DgroupId=${groupId}"/>
+            <arg value="-Dversion=${mav}"/>
+            <arg value="-Dpackaging=${pkg}"/>
+        </exec>
+    </target>
 
   <!-- Generic doc target. Requires "docacccess" and "docsubdir"
        properties to be set. -->
@@ -882,7 +928,7 @@ $State: Exp $
 
     <mkdir dir="${distdir}"/>
     <mkdir dir="${distdir}/lib"/>
-    
+
     <!-- Create the lib Zip archive -->
     <zip destfile="${distdir}/lib/jai-${version_file}-${platform}${buildtime}.zip"
 	 filesonly="true">

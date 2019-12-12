@@ -49,7 +49,7 @@ and are copied to the `jai-core/build/<platform>/opt/<jrenativesubdir>` director
 
 To see other targets that are available, type `"ant -projecthelp"`. Note that ant must be run from the top-level directory.
 
-##Running Java Advanced Imaging
+## Running Java Advanced Imaging
 
 To run Java Advanced Imaging, please checkout the [jai-demos](https://jai-demos.dev.java.net/) project and then refer 
 to [README-build.html](http://localhost:63342/jai-demos/README-build.html) in jai-demos for details on building and 

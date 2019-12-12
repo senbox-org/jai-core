@@ -176,7 +176,10 @@ $State: Exp $
         </condition>
 
         <condition property="isWindowsOnX86">
-            <os family="windows" arch="x86"/>
+            <or>
+                <os family="windows" arch="x86"/>
+                <os family="windows" arch="amd64"/>
+            </or>
         </condition>
     </target>
 

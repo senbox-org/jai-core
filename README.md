@@ -2,12 +2,15 @@
 
 This version of Java Advanced Imaging has been modified so it works with OpenJDK too.
 
-To build the JAI packages, you must first checkout this [jai-core](https://github.com/senbox-org/jai-core) 
-git repository on [GitHub](https://github.com/). Therefore you can use tools offered by GitHub or the command line.
+To build the JAI packages, you must first checkout this 
+[jai-core](https://github.com/senbox-org/jai-core) git repository on 
+[GitHub](https://github.com/). Therefore you can use tools offered by GitHub 
+or the command line.
 
 Step into your projects base directory. E.g. D:\projects \
 Then clone the GitGub repository by typing  \
-This will create a new directory named `jai-core` in you projects base directory with the followin content:
+This will create a new directory named `jai-core` in you projects base directory with 
+the followin content:
 
     D:\>cd projects
     
@@ -69,7 +72,8 @@ The following software must be installed:
 
 ## Code not be compiled
 
-If you are using an IDE e.g. Intellij Idea, please don't be surprised if the checked out code is not be compiled. \
+If you are using an IDE e.g. Intellij Idea, please don't be surprised if the checked
+out code is not be compiled. \
 You will receive warnings that some classes could not be found. The missing 
 classes are not created until the Ant build is executed.
 So, after run the ant build a first time, the code should compile. 
@@ -91,23 +95,28 @@ To build:
     cd <project-base-dir>/jai-core
     ant
 
-The above steps build both the Java code for `javax.media.jai.*` and `com.sun.media.jai.*` packages.
+The above steps build both the Java code for `javax.media.jai.*` and `com.sun.media.jai.*` 
+packages.
 
-The build will be placed in `jai-core/build/<platform>/opt`, where `<platform>` is determined from the `ant echo` command:
+The build will be placed in `jai-core/build/<platform>/opt`, where `<platform>` is determined 
+from the `ant echo` command:
 
     ant echo
 
-Jar files are placed in `jai-core/build/<platform>/opt/lib/ext`. Binaries for native libraries are part of the project
-and are copied to the `jai-core/build/<platform>/opt/<jrenativesubdir>` directory as part of the build, where 
-`<jrenativesubdir>` is determined from the `ant echo` command as above.
+Jar files are placed in `jai-core/build/<platform>/opt/lib/ext`. Binaries for native libraries 
+are part of the project and are copied to the `jai-core/build/<platform>/opt/<jrenativesubdir>` 
+directory as part of the build, where `<jrenativesubdir>` is determined from the `ant echo` 
+command as above.
 
-To see other targets that are available, type `"ant -projecthelp"`. Note that ant must be run from the top-level directory.
+To see other targets that are available, type `"ant -projecthelp"`. Note that ant must be run 
+from the top-level directory.
 
 ## Running Java Advanced Imaging
 
-To run Java Advanced Imaging, please checkout the [jai-demos](https://jai-demos.dev.java.net/) project and then refer 
-to [README-build.html](http://localhost:63342/jai-demos/README-build.html) in jai-demos for details on building and 
-running Java Advanced Imaging demo programs.
+To run Java Advanced Imaging, please checkout the 
+[jai-demos](https://jai-demos.dev.java.net/) project and then refer to
+[README-build.html](http://localhost:63342/jai-demos/README-build.html) in jai-demos 
+for details on building and running Java Advanced Imaging demo programs.
 
 
 #### copyrights ... licences

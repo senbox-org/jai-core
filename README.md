@@ -1,25 +1,71 @@
-# Building the Java Advanced Imaging Packages
+# Java Advanced Imaging
 
-To build the Java Advanced Imaging packages, you must first checkout the [jai-core](http://jai-core.dev.java.net/) 
-CVS repository on java.net. For example, run the cvs checkout command as follows:
+This version of Java Advanced Imaging has been modified so it works with OpenJDK too.
 
-    cd <cvs-root-dir>
-    cvs checkout jai-core
+To build the JAI packages, you must first checkout this [jai-core](https://github.com/senbox-org/jai-core) 
+git repository on [GitHub](https://github.com/). Therefore you can use tools offered by GitHub or the command line.
+
+Step into your projects base directory. E.g. D:\projects \
+Then clone the GitGub repository by typing  \
+This will create a new directory named `jai-core` in you projects base directory with the followin content:
+
+    D:\>cd projects
+    
+    D:\projects>git clone https://github.com/senbox-org/jai-core.git
+    Cloning into 'jai-core'...
+    remote: Enumerating objects: 30, done.
+    remote: Counting objects: 100% (30/30), done.
+    remote: Compressing objects: 100% (21/21), done.
+    remote: Total 2052 (delta 15), reused 20 (delta 9), pack-reused 2022
+    Receiving objects: 100% (2052/2052), 100.31 MiB | 27.13 MiB/s, done.
+    Resolving deltas: 100% (872/872), done.
+    Checking out files: 100% (884/884), done.
+    
+    D:\projects>cd jai-core
+    
+    D:\projects\jai-core>dir /a
+     Volume in drive D has no label
+     Volume Serial Number is F4AC-9851
+    
+     Directory of D:\projects\jai-core
+    
+    13.12.2019  09:15    <DIR>          .
+    13.12.2019  09:15    <DIR>          ..
+    13.12.2019  09:15    <DIR>          .git
+    13.12.2019  09:15                79 .gitignore
+    13.12.2019  09:15                79 .travis.yml
+    13.12.2019  09:15    <DIR>          build-tools
+    13.12.2019  09:15             1.616 build.properties
+    13.12.2019  09:15            39.774 build.xml
+    13.12.2019  09:15             2.530 COPYRIGHT.txt
+    13.12.2019  09:15             7.013 LICENSE-jaispec.txt
+    13.12.2019  09:15            18.622 LICENSE-JDL.txt
+    13.12.2019  09:15             7.255 LICENSE-JRL.txt
+    13.12.2019  09:15            10.556 LICENSE-mediaLibJAI.txt
+    13.12.2019  09:15               386 LICENSE.txt
+    13.12.2019  09:15             3.821 README-build.html
+    13.12.2019  09:15             2.591 README.md
+    13.12.2019  09:15    <DIR>          src
+    13.12.2019  09:15    <DIR>          www
+                  12 Datei(en),         94.322 Bytes
+                   6 Verzeichnis(se), 409.259.569.152 Bytes frei
+    
+    D:\projects\jai-core>
+ 
 
 ## System Requirements
 
-Any operating environment that supports J2SE should work. We have built `jai-core` on the following 
-operating environments:
+Any operating environment that supports OpenJDK version > 7 should work.
+We have built `jai-core` on the following operating environments:
 
-* Solaris-sparc: Sparc (Ultra60 or better) running Solaris 9
-* Solaris-x86: i386/i586 running Solaris-x86 9
-* Linux: i386/i586 running SuSE 9 or RedHat 9.0
-* Windows: Windows/XP, Windows 2000, Windows 7, Windows 10
+* Windows: Windows 10 and [OpenJDK](https://adoptopenjdk.net/) 
 
 The following software must be installed:
 
-* [J2SE 1.3](http://java.sun.com/j2se) or later.
-* [Apache Ant 1.6](http://jakarta.apache.org/ant) or later
+* [OpenJDK 8](https://adoptopenjdk.net/) or later.
+  It should also work with other OpenJDK providers.   
+* [Apache Ant 1.10.5](http://jakarta.apache.org/ant) or later
+* [Apache Maven 3.3.1](https://maven.apache.org/) or later
 
 ## Building Java Advanced Imaging
 
@@ -30,11 +76,12 @@ Before you start building, your PATH must include the following directories:
 * Setting JAVA_HOME or JAVACMD environment variable will supersede <jdk-root-dir>/bin for ant.  
   For further details please refer to the ant manual.
 
-The default target, jar, creates both optimized and debug jar files.
+The default ant target, `mvn-install-files`, creates both optimized and debug jar files
+but only installs the optimized jar to the local maven repository.
 
 To build:
 
-    cd <cvs-root-dir>/jai-core
+    cd <project-base-dir>/jai-core
     ant
 
 The above steps build both the Java code for `javax.media.jai.*` and `com.sun.media.jai.*` packages.

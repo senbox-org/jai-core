@@ -67,6 +67,14 @@ The following software must be installed:
 * [Apache Ant 1.10.5](http://jakarta.apache.org/ant) or later
 * [Apache Maven 3.3.1](https://maven.apache.org/) or later
 
+## Code not compilable
+
+If you are using an IDE (integrated development environment) e.g. Intellij Idea,
+please don't be surprised if the checked out code is not compilable. \
+You will receive warnings that some classes could not be found. The missing 
+classes are not created until the Ant build is executed.
+So, after run the ant build a first time, the code should be compilable. 
+
 ## Building Java Advanced Imaging
 
 Before you start building, your PATH must include the following directories:
